@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  seminar_4:
+    image: ${DOCKER_REGISTRY-}seminar_4
+    container_name: courses.app
+    build:
+      context: .
+      dockerfile: Dockerfile
+  students-db:
+    image: mysql:latest
+    container_name: courses.db
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=coursesDB
+    volumes:
+      - ./.containers/database:/var/lib/mysql
+    ports:
+      - 3306:3306
